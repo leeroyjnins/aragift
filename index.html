@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Birthday Gift To Ara</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: pan-y;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+            /* Cuter font */
+            background: url('bg5.png') no-repeat center bottom fixed, linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+            background-size: cover, cover;
+            /* Pastel Sunset/Dream */
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-select: none;
+
+        }
+
+        /* Landing Page Styles */
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+            z-index: 1000;
+            transition: opacity 0.1s ease, transform 0.5s ease;
+            /* Slower fade for dramatic reveal */
+        }
+
+        .landing-page.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        /* Gift Box Container (Landing Page) */
+        .gift-box-container {
+            position: relative;
+            cursor: pointer;
+            z-index: 20;
+            /* Ensure above game container */
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Game Container */
+        .game-container {
+            position: absolute;
+            bottom: 27%;
+            /* Matches gift box position */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 1s ease 0.5s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .game-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Anime Style Gift Box */
+        .gift-box {
+            width: 220px;
+            height: 220px;
+            position: relative;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .box-base {
+            width: 200px;
+            height: 150px;
+            background: #FFB7C5;
+            /* Pastel Pink */
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: inset -10px -10px 0 rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 4px solid #FFF;
+            z-index: 1;
+        }
+
+        /* Base Vertical Ribbon */
+        .box-base::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: #FFF;
+            transform: translateX(-50%);
+            border-left: 2px dashed #FFD1DC;
+            border-right: 2px dashed #FFD1DC;
+        }
+
+        .box-lid {
+            width: 220px;
+            height: 60px;
+            background: #FFABC2;
+            /* Slightly darker pink */
+            position: absolute;
+            top: 20px;
+            left: 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 4px solid #FFF;
+            transform-origin: top left;
+            transition: transform 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.6s ease;
+            z-index: 2;
+        }
+
+        /* Lid Vertical Ribbon */
+        .box-lid::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: #FFF;
+            transform: translateX(-50%);
+            border-left: 2px dashed #FFD1DC;
+            border-right: 2px dashed #FFD1DC;
+        }
+
+        .gift-box.opening .box-lid {
+            transform: translateY(-240px) rotate(-5deg);
+            opacity: 0;
+        }
+
+        /* Cute Bow */
+        .bow {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 60px;
+            z-index: 3;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-box:hover .bow {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        /* Left Loop */
+        .bow::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px 50px 0 50px;
+            background: #FFF;
+            transform: rotate(-15deg);
+            border: 3px solid #ff9db5;
+            box-shadow: inset 5px 5px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Right Loop */
+        .bow::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px 50px 50px 0;
+            background: #FFF;
+            transform: rotate(15deg);
+            border: 3px solid #ff9db5;
+            box-shadow: inset -5px 5px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .bow-center {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #FFF;
+            border-radius: 50%;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            border: 3px solid #ff9db5;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bow-center::after {
+            content: '♥';
+            color: #ff9db5;
+            font-size: 14px;
+        }
+
+        .landing-title {
+            margin-top: 80px;
+            /* More space for the bouncy box */
+            font-size: 52px;
+            font-weight: bold;
+            color: #FFF;
+            text-align: center;
+            text-shadow: 2px 2px 0px #ff9db5, 4px 4px 0px rgba(0, 0, 0, 0.1);
+            /* Anime title style (pop border) */
+            animation: pulse 2s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .landing-subtitle {
+            margin-top: 20px;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            position: absolute;
+            opacity: 0;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+
+
+        .scene {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* GIF Cat Styling */
+        .cat {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 160px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .cat:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .cat:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        .cat-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s;
+        }
+
+        .cat-gif.hidden {
+            opacity: 0;
+            position: absolute;
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @keyframes particleFly {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .scene {
+                transform: scale(0.9);
+            }
+
+            .landing-title {
+                font-size: 30px;
+            }
+
+            .landing-subtitle {
+                font-size: 16px;
+            }
+
+            .video-wrapper {
+                width: 98%;
+                /* Wider on mobile */
+            }
+        }
+
+        /* Greetings Container */
+        .greetings-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            max-width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 15;
+        }
+
+        .greetings-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .greetings-gif {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+
+
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: #e9d2ef;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease 0.5s;
+            /* Delay appearance */
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .controls.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn {
+            background: #a75183;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #f55d62;
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Video Popup */
+        .video-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-popup.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            /* Force landscape ratio */
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Ensure video fits within the landscape box */
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Anime Style Dialogue Box */
+        .dialogue-box {
+            position: absolute;
+            top: -60px;
+            right: -70px;
+            background: #FFF;
+            border: 4px solid #7c4b54;
+            border-radius: 50%;
+            padding: 15px 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f55d62;
+            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: scale(0) rotate(-10deg);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 20;
+            white-space: nowrap;
+        }
+
+        /* Spike for the bubble */
+        .dialogue-box::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            bottom: 10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 15px solid #7c4b54;
+        }
+
+        .dialogue-box::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            bottom: 10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 15px solid #FFF;
+        }
+
+        .dialogue-box.visible {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .from-text {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #FFF;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Top Floating Items */
+        .floating-items {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 3s ease 0.8s;
+        }
+
+        .floating-items.visible {
+            opacity: 1;
+        }
+
+        .floating-item {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Staggered animations with random rotations */
+        .floating-item:nth-child(1) {
+            animation: float1 3s ease-in-out infinite;
+            animation-delay: 0s;
+        }
+
+        .floating-item:nth-child(2) {
+            animation: float2 3.2s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        .floating-item:nth-child(3) {
+            animation: float3 2.8s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .floating-item:nth-child(4) {
+            animation: float4 3.5s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        .floating-item:nth-child(5) {
+            animation: float5 3.1s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        /* Individual float animations with rotations */
+        @keyframes float1 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-30deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(-30deg);
+            }
+        }
+
+        @keyframes float2 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(8deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(8deg);
+            }
+        }
+
+        @keyframes float3 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(-5deg);
+            }
+        }
+
+        @keyframes float4 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(15deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(15deg);
+            }
+        }
+
+        @keyframes float5 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-10deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(-10deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .floating-item {
+                width: 50px;
+                /* Smaller on mobile */
+            }
+
+            .floating-items {
+                top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Items (Outside Landing Page) -->
+    <div class="floating-items" id="floatingItems">
+        <img src="teddy.png" class="floating-item" alt="Teddy">
+        <img src="pc.png" class="floating-item" alt="PC">
+        <img src="keys.png" class="floating-item" alt="Keys">
+        <img src="pen.png" class="floating-item" alt="Pen">
+        <img src="balloon.png" class="floating-item" alt="Balloon">
+    </div>
+
+    <!-- Landing Page -->
+    <div class="landing-page" id="landingPage">
+        <div class="gift-box-container" id="giftBoxContainer">
+            <div class="gift-box" id="giftBox">
+                <div class="box-lid">
+                    <div class="bow">
+                        <div class="bow-center"></div>
+                    </div>
+                </div>
+                <div class="box-base"></div>
+            </div>
+
+        </div>
+        <div class="from-text">From: kench</div>
+    </div>
+
+    <!-- Greetings Container -->
+    <div class="greetings-container" id="greetingsContainer">
+        <img src="greetings.gif" alt="Happy Birthday!" class="greetings-gif">
+    </div>
+
+    <!-- Video Popup -->
+    <div class="video-popup" id="videoPopup">
+        <div class="video-wrapper">
+            <button class="close-btn" id="closeVideo">×</button>
+            <video src="yeet.mp4" id="popupVideo" controls></video>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" id="controls">
+        <button class="btn" id="btnGreetings">Home</button>
+        <button class="btn" id="btnCat">Play</button>
+        <button class="btn" id="btnVideo">Watch</button>
+    </div>
+
+    <!-- Game Container -->
+    <div class="game-container" id="gameContainer">
+        <div class="scene">
+            <!-- Cat with GIFs -->
+            <div class="cat" id="cat">
+                <img src="yeet_stand.gif" class="cat-gif" id="catStand" alt="Stand">
+                <img src="yeet_this2.gif" class="cat-gif hidden" id="catFlip" alt="Flip">
+                <div class="dialogue-box" id="yeetBubble"> YEET! </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bgMusic" preload="auto" loop autoplay>
+        <source src="fyt.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Landing Page Logic
+        const landingPage = document.getElementById('landingPage');
+        const giftBox = document.getElementById('giftBox');
+        const giftBoxContainer = document.getElementById('giftBoxContainer');
+        const gameContainer = document.getElementById('gameContainer');
+        const floatingItems = document.getElementById('floatingItems');
+        const greetingsContainer = document.getElementById('greetingsContainer');
+        const controls = document.getElementById('controls');
+        const videoPopup = document.getElementById('videoPopup');
+        const popupVideo = document.getElementById('popupVideo');
+        const closeVideoBtn = document.getElementById('closeVideo');
+        const bgMusic = document.getElementById('bgMusic');
+
+        // Try to autoplay immediately
+        window.addEventListener('load', () => {
+            bgMusic.volume = 0.5;
+            bgMusic.play().catch(error => {
+                console.log("Autoplay prevented by browser, waiting for interaction.");
+                // Fallback: Play on first click anywhere
+                document.body.addEventListener('click', () => {
+                    bgMusic.play();
+                }, { once: true });
+            });
+        });
+
+        // Buttons
+        const btnGreetings = document.getElementById('btnGreetings');
+        const btnCat = document.getElementById('btnCat');
+        const btnVideo = document.getElementById('btnVideo');
+
+
+
+        giftBoxContainer.addEventListener('click', openGift);
+
+        function openGift() {
+            // Disable further clicks
+            giftBoxContainer.style.pointerEvents = 'none';
+
+            // Ensure music plays on this interaction (fix for autoplay issues)
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => console.log("Audio play failed:", e));
+            }
+
+            // Open the box
+            giftBox.classList.add('opening');
+
+            // Create confetti
+            createConfetti();
+
+            // Hide landing page and show greetings after animation
+            setTimeout(() => {
+                landingPage.classList.add('hidden');
+                greetingsContainer.classList.add('visible');
+                controls.classList.add('visible');
+                floatingItems.classList.add('visible');
+            }, 800);
+        }
+
+        // Navigation Logic
+        btnGreetings.addEventListener('click', () => {
+            gameContainer.classList.remove('visible');
+            greetingsContainer.classList.add('visible');
+        });
+
+        btnCat.addEventListener('click', () => {
+            greetingsContainer.classList.remove('visible');
+            gameContainer.classList.add('visible');
+            // Hide game container while in greetings, show it now
+        });
+
+        btnVideo.addEventListener('click', () => {
+            videoPopup.classList.add('visible');
+            bgMusic.pause(); // Mute BG music
+            popupVideo.play();
+        });
+
+        closeVideoBtn.addEventListener('click', () => {
+            videoPopup.classList.remove('visible');
+            popupVideo.pause();
+            popupVideo.currentTime = 0;
+            bgMusic.play(); // Resume BG music
+        });
+
+        // Close video on outside click
+        videoPopup.addEventListener('click', (e) => {
+            if (e.target === videoPopup) {
+                videoPopup.classList.remove('visible');
+                popupVideo.pause();
+                popupVideo.currentTime = 0;
+                bgMusic.play(); // Resume BG music
+            }
+        });
+
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff6b9d', '#87ceeb', '#98fb98', '#ff69b4', '#ffb347'];
+            const confettiCount = 100;
+
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-20px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 20);
+            }
+        }
+
+        // GIF Interaction Logic (Click + Swipe)
+        let isAnimating = false;
+        let startY = 0;
+        let startTime = 0;
+        const threshold = 50; // minimum swipe distance
+        const allowedTime = 1000; // maximum time for swipe
+
+        const cat = document.getElementById('cat');
+        const catStand = document.getElementById('catStand');
+        const catFlip = document.getElementById('catFlip');
+        const container = document.querySelector('.game-container');
+
+        // Touch events for swipe
+        container.addEventListener('touchstart', handleTouchStart, { passive: false });
+        container.addEventListener('touchmove', handleTouchMove, { passive: false });
+        container.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+        // Mouse events for desktop (swipe and click)
+        let isDragging = false;
+        container.addEventListener('mousedown', handleMouseDown);
+        container.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener('mouseup', handleMouseUp);
+        container.addEventListener('mouseleave', handleMouseUp);
+
+        function handleTouchStart(e) {
+            if (isAnimating) return;
+            startY = e.touches[0].clientY;
+            startTime = new Date().getTime();
+        }
+
+        function handleTouchMove(e) {
+            if (isAnimating) return;
+            e.preventDefault(); // Prevent scrolling while swiping
+        }
+
+        function handleTouchEnd(e) {
+            if (isAnimating) return;
+
+            const endY = e.changedTouches[0].clientY;
+            const endTime = new Date().getTime();
+            const diffY = startY - endY;
+            const elapsedTime = endTime - startTime;
+
+            if (Math.abs(diffY) >= threshold && diffY > 0 && elapsedTime <= allowedTime) {
+                // Valid upward swipe
+                triggerAnimation();
+            }
+        }
+
+        function handleMouseDown(e) {
+            if (isAnimating) return;
+            isDragging = true;
+            startY = e.clientY;
+            startTime = new Date().getTime();
+        }
+
+        function handleMouseMove(e) {
+            if (!isDragging || isAnimating) return;
+        }
+
+        function handleMouseUp(e) {
+            if (!isDragging || isAnimating) return;
+            isDragging = false;
+
+            const endY = e.clientY;
+            const endTime = new Date().getTime();
+            const diffY = startY - endY;
+            const elapsedTime = endTime - startTime;
+
+            // Check for swipe
+            if (Math.abs(diffY) >= threshold && diffY > 0 && elapsedTime <= allowedTime) {
+                triggerAnimation();
+            }
+            // If not a swipe, treat as a click
+            else if (Math.abs(diffY) < 10 && elapsedTime < 300) {
+                triggerAnimation();
+            }
+        }
+
+        function triggerAnimation() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Switch to flip GIF and force restart
+            catStand.classList.add('hidden');
+            // Force GIF to restart by reloading src
+            const flipSrc = catFlip.src;
+            catFlip.src = '';
+            catFlip.src = flipSrc;
+            catFlip.classList.remove('hidden');
+
+            // Show particles
+            setTimeout(() => {
+                createParticles();
+            }, 200);
+
+            // Show "YEET!" bubble
+            setTimeout(() => {
+                document.getElementById('yeetBubble').classList.add('visible');
+            }, 400);
+
+            // Auto-reset after 1.5 seconds
+            setTimeout(() => {
+                resetAnimation();
+            }, 1500);
+        }
+
+        function createParticles() {
+            const colors = ['#ffd700', '#ff6b6b', '#ffb6c1', '#87ceeb'];
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = '50%';
+                    particle.style.bottom = '100px';
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                    const angle = (Math.random() * 60 - 30) * (Math.PI / 180);
+                    const velocity = 100 + Math.random() * 100;
+                    const tx = Math.sin(angle) * velocity;
+                    const ty = -Math.cos(angle) * velocity;
+
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    particle.style.animation = `particleFly 0.8s ease-out forwards`;
+
+                    document.querySelector('.scene').appendChild(particle);
+
+                    setTimeout(() => particle.remove(), 800);
+                }, i * 50);
+            }
+        }
+
+        function resetAnimation() {
+            isAnimating = false;
+
+            // Switch back to stand GIF
+            catFlip.classList.add('hidden');
+            catStand.classList.remove('hidden');
+
+            // Hide bubble
+            document.getElementById('yeetBubble').classList.remove('visible');
+        }
+    </script>
+
+</body>
+
+</html>
